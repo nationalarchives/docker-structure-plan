@@ -71,4 +71,4 @@ C4Context
 
 In the same way that all Wagtail applications could extend the same Wagtail base Docker image, this approach would allow us to make other framework Docker images in the future.
 
-For example, if we had a need to make a Python/Flask project in the future, we could inherit all the features from our base Python image. Similarly if we needed a more specific version of Wagtail for some special applications then we could simply extend our base Wagtail image.
+For example, if we had a need to make a Python/Flask project in the future, we could inherit all the features from our base Python image. Similarly if we needed a more specific version of Wagtail for some special applications (for example, to host on [platform.sh](https://platform.sh/)) then we could simply extend our base Wagtail image.
