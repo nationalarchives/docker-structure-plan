@@ -53,7 +53,7 @@ C4Context
 
         Boundary(tna_application_registry, "Application images", "boundary") {
             Container(etna, "ETNA", "Application")
-            Container(developer_handbook, "TNA Developer Handbook", "Application")
+            Container(developer_handbook, "TNA Developer Handbook", "Example MKDocs application")
         }
     }
 
@@ -66,6 +66,20 @@ C4Context
 
     UpdateLayoutConfig($c4ShapeInRow="4", $c4BoundaryInRow="1")
 ```
+
+#### TNA base Python image
+
+If we choose to use [Poetry](https://python-poetry.org/) for our dependency management on all Python projects then we can use this image to set it up in a consistent manner and ensure all applications use the same version.
+
+#### TNA Wagtail image
+
+Creating a standardised Wagtail image will allow us to quickly and easily get a new application started. All the generic configuration can be done at this stage and we can ensure that all our Wagtail applications run in a consistent manner (e.g. using [Gunicorn](https://gunicorn.org/)).
+
+#### TNA MKDocs image
+
+The MKDocs image layer is an example of other application types that could benefit from the inheritence of higher level images.
+
+Similarly to the Wagtail image, all our MKDocs sites would receive the same benefits from the Poetry setup done at a higher stage and we could spin up MKDocs sites with greater ease.
 
 ### Future
 
