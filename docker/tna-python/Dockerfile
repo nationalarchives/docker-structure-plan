@@ -6,7 +6,6 @@ ENV \
   PYTHONUNBUFFERED=1 \
   PYTHONHASHSEED=random \
   PYTHONDONTWRITEBYTECODE=1 \
-  # PYTHONPATH=/home/app/.venv/bin/activate \
   PYTHON_VIRTUAL_ENV=/home/app/.venv \
   # pip:
   PIP_NO_CACHE_DIR=off \
