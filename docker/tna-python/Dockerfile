@@ -1,0 +1,45 @@
+FROM python:3.11
+
+ENV \
+  # python:
+  PYTHONFAULTHANDLER=1 \
+  PYTHONUNBUFFERED=1 \
+  PYTHONHASHSEED=random \
+  PYTHONDONTWRITEBYTECODE=1 \
+  # PYTHONPATH=/home/app/.venv/bin/activate \
+  PYTHON_VIRTUAL_ENV=/home/app/.venv \
+  # pip:
+  PIP_NO_CACHE_DIR=off \
+  PIP_DISABLE_PIP_VERSION_CHECK=on \
+  PIP_DEFAULT_TIMEOUT=100 \
+  # poetry:
+  POETRY_HOME=/home/app/.local \
+  POETRY_VERSION=1.4.2 \
+  POETRY_NO_INTERACTION=1 \
+  POETRY_VIRTUALENVS_CREATE=true \
+  POETRY_VIRTUALENVS_IN_PROJECT=true
+
+RUN apt-get update && \
+    apt-get install -y gettext
+
+EXPOSE 8080
+
+RUN groupadd -r tnacontainergroup && \
+    useradd --no-log-init -r -g tnacontainergroup app
+USER app
+WORKDIR /home/app
+
+RUN python3 -m venv $PYTHON_VIRTUAL_ENV
+RUN pip install --upgrade pip
+
+COPY --chown=app:app bin/tna-build bin/tna-run .local/bin/
+RUN chmod +x .local/bin/tna-build .local/bin/tna-run
+
+RUN curl -sSL "https://install.python-poetry.org" | python -
+
+ENV PATH="/home/app/.local/bin:${PYTHON_VIRTUAL_ENV}/bin:${PATH}"
+
+COPY --chown=app:app pyproject.toml.template poetry.lock ./
+
+LABEL maintainer="Andrew Hosgood <andrew.hosgood@nationalarchives.gov.uk>" \
+      version="0.1.0"

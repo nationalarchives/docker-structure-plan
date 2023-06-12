@@ -81,6 +81,10 @@ The MKDocs image layer is an example of other application types that could benef
 
 Similarly to the Wagtail image, all our MKDocs sites would receive the same benefits from the Poetry setup done at a higher stage and we could spin up MKDocs sites with greater ease.
 
+### Security
+
+By defining upfront what our "approved" dependencies are, we have more control over security.
+
 ### Future
 
 In the same way that all Wagtail applications could extend the same Wagtail base Docker image, this approach would allow us to make other framework Docker images in the future.

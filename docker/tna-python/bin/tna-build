@@ -1,0 +1,15 @@
+#!/bin/bash
+if [ -z "$TNA_APPLICATION_NAME" ]; then
+    echo "\$TNA_APPLICATION_NAME is not set";
+    exit 1
+fi
+
+if [ -z "$TNA_APPLICATION_VERSION" ]; then
+    echo "\$TNA_APPLICATION_VERSION is not set";
+    exit 1
+fi
+
+cp /home/app/pyproject.toml.template /home/app/pyproject.toml
+cat /home/app/pyproject.toml.template | envsubst > /home/app/pyproject.toml
+
+poetry install --sync --no-root

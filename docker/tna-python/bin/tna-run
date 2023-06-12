@@ -1,0 +1,2 @@
+#!/bin/bash
+exec /home/app/.venv/bin/gunicorn ${TNA_APPLICATION_ENTRYPOINT} --workers 3 --threads 3 --log-level=WARN -b 0.0.0.0:8080
