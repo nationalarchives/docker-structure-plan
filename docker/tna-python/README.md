@@ -30,3 +30,7 @@ The development dependencies should also now all be the same across all applicat
 - `TNA_APPLICATION_VERSION` - the application version that gets compiled into the Poetry config
 - `TNA_APPLICATION_DESCRIPTION` (optional) - a description of the application that gets compiled into the Poetry config
 - `TNA_APPLICATION_ENTRYPOINT` - the entrypoint for gunicorn
+
+## Future
+
+We could look at enforcing MKDocs as part of all Python projects to promote more documentation.
