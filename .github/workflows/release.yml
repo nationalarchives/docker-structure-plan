@@ -1,0 +1,25 @@
+name: CI
+
+on:
+  push:       # FOR TESTING
+    branches: # FOR TESTING
+      - main  # FOR TESTING
+  release:
+    types:
+      - published
+
+jobs:
+  python:
+    name: Python
+    uses: ./.github/workflows/docker-build-deploy.yml
+    with:
+      IMAGE_NAME: tna-python
+      DOCKERFILE: docker/tna-python/Dockerfile
+
+  python-django:
+    name: Python Django
+    needs: python
+    uses: ./.github/workflows/docker-build-deploy.yml
+    with:
+      IMAGE_NAME: tna-python-django
+      DOCKERFILE: docker/tna-python-django/Dockerfile
