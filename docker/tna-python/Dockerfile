@@ -19,7 +19,7 @@ ENV \
   POETRY_VIRTUALENVS_IN_PROJECT=true
 
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends gettext=0.21-12 && \
+    apt-get install -y --no-install-recommends gettext=0.21-12 curl=7.88.1-10 && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
