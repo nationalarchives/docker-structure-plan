@@ -3,7 +3,7 @@ name: CI
 on:
   push:       # FOR TESTING
     branches: # FOR TESTING
-      - main  # FOR TESTING
+      - initial-idea  # FOR TESTING
   release:
     types:
       - published
