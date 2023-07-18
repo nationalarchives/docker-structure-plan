@@ -30,7 +30,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
     - name: Build image
-      run: docker build --tag ${{ inputs.image-name }} --label "runnumber=${GITHUB_RUN_ID}" --platform=linux/amd64 ${{ inputs.docker-context }}
+      run: docker build --tag ${{ inputs.image-name }} --label "runnumber=${GITHUB_RUN_ID}" ${{ inputs.docker-context }}
     - name: Log in to registry
       run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $ --password-stdin
     - name: Push image
