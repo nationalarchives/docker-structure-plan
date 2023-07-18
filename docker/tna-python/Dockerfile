@@ -33,10 +33,9 @@ WORKDIR /home/app
 # RUN python3 -m venv $PYTHON_VIRTUAL_ENV
 # RUN pip install --upgrade pip
 
-SHELL ["/bin/bash", "-o", "pipefail", "-c"]
-RUN curl -sSL "https://install.python-poetry.org" | python -
-
-ENV PATH="/home/app/.local/bin:${PYTHON_VIRTUAL_ENV}/bin:${PATH}"
+# SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+# RUN curl -sSL "https://install.python-poetry.org" | python -
+# ENV PATH="/home/app/.local/bin:${PYTHON_VIRTUAL_ENV}/bin:${PATH}"
 
 COPY --chown=app:app bin/tna-build bin/tna-run .local/bin/
 RUN chmod +x .local/bin/tna-build .local/bin/tna-run
