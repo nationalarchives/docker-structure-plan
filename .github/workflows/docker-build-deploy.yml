@@ -2,10 +2,10 @@ name: Docker build
 on:
   workflow_call:
     inputs:
-      IMAGE_NAME:
+      image-name:
         required: true
         type: string
-      DOCKERFILE:
+      dockerfile:
         required: true
         type: string
 permissions:
@@ -19,7 +19,7 @@ jobs:
       uses: actions/checkout@v3
     - uses: hadolint/hadolint-action@v3.1.0
       with:
-        dockerfile: ${{ INPUT_DOCKERFILE }}
+        dockerfile: ${{ inputs.dockerfile }}
   build-and-deploy:
     runs-on: ubuntu-latest
     needs: lint
@@ -27,12 +27,12 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
     - name: Build image
-      run: docker build --tag $INPUT_IMAGE_NAME --label "runnumber=${GITHUB_RUN_ID}" --platform=linux/amd64 $INPUT_DOCKERFILE
+      run: docker build --tag ${{ inputs.image-name }} --label "runnumber=${GITHUB_RUN_ID}" --platform=linux/amd64 ${{ inputs.dockerfile }}
     - name: Log in to registry
       run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $ --password-stdin
     - name: Push image
       run: |
-        IMAGE_ID=ghcr.io/${{ github.repository_owner }}/$INPUT_IMAGE_NAME
+        IMAGE_ID=ghcr.io/${{ github.repository_owner }}/${{ inputs.image-name }}
         # Change all uppercase to lowercase
         IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
         # Strip git ref prefix from version
@@ -43,13 +43,13 @@ jobs:
         [ "$VERSION" == "main" ] && VERSION=latest
         echo IMAGE_ID=$IMAGE_ID
         echo VERSION=$VERSION
-        docker tag $INPUT_IMAGE_NAME $IMAGE_ID:$VERSION
+        docker tag ${{ inputs.image-name }} $IMAGE_ID:$VERSION
         docker push $IMAGE_ID:$VERSION
     - name: Upload artifact
       uses: actions/upload-artifact@v3
       with:
         name: dockerimagecache
-        path: /tmp/dockerimage-$INPUT_IMAGE_NAME.tar
+        path: /tmp/dockerimage-${{ inputs.image-name }}.tar
   test:
     runs-on: ubuntu-latest
     needs: build-and-deploy
@@ -63,5 +63,5 @@ jobs:
           path: /tmp
       - name: Load image
         run: |
-          docker load --input /tmp/dockerimage-$INPUT_IMAGE_NAME.tar
+          docker load --input /tmp/dockerimage-${{ inputs.image-name }}.tar
           docker image ls -a

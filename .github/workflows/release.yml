@@ -13,13 +13,13 @@ jobs:
     name: Python
     uses: ./.github/workflows/docker-build-deploy.yml
     with:
-      IMAGE_NAME: tna-python
-      DOCKERFILE: docker/tna-python/Dockerfile
+      image-name: tna-python
+      dockerfile: docker/tna-python/Dockerfile
 
   python-django:
     name: Python Django
     needs: python
     uses: ./.github/workflows/docker-build-deploy.yml
     with:
-      IMAGE_NAME: tna-python-django
-      DOCKERFILE: docker/tna-python-django/Dockerfile
+      image-name: tna-python-django
+      dockerfile: docker/tna-python-django/Dockerfile
