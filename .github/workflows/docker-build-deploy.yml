@@ -50,6 +50,7 @@ jobs:
         echo VERSION=$VERSION
         docker tag ${{ inputs.image-name }} $IMAGE_ID:$VERSION
         docker push $IMAGE_ID:$VERSION
+    - run: ls -alh /tmp
     - name: Upload artifact
       uses: actions/upload-artifact@v3
       with:
