@@ -25,8 +25,9 @@ RUN apt-get update && \
 
 EXPOSE 8080
 
-RUN groupadd -r tnacontainergroup && \
-    useradd --no-log-init -r -g tnacontainergroup app
+# RUN groupadd -r tnacontainergroup && \
+#     useradd --no-log-init -r -g tnacontainergroup app
+RUN useradd -m app
 USER app
 WORKDIR /home/app
 
