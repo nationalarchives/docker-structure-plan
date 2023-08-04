@@ -1,5 +1,7 @@
 # Docker structure plan
 
+> ⚠️ **This plan has now been started to be implimented here: https://github.com/nationalarchives/docker** ⚠️
+
 There is a need to standardise our technology stacks in a way that is secure, maintainable and reusable.
 
 Currently each application could have its own Docker implementation and differences exist between them that makes updating and deploying them more of a task than it should be.
